@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "core/base.html" %}
 
-<head>
-    <title>Taskhub</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-</head>
+{% block title %}Home{% endblock %}
 
-<body>
-    TaskHub
-</body>
-
-</html>
+{% block body %}
+<div class="p-4 gray-100 text-3xl max-w-4xl flex md:min-h-[30rem] items-center">
+    <p>
+        Taskhub is a task management app built in python to facilitate the creation, assignment and tracking of tasks
+        within a collaborative environment.
+    </p>
+</div>
+<a href="{% url 'core:signup' %}"
+    class="m-4 p-4 text-gray-100 rounded-sm bg-teal-700 hover:bg-teal-900 font-semibold">Sign up Today</a>
+{% endblock %}

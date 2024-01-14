@@ -2,18 +2,57 @@
 <html lang="en">
 
 <head>
-    <title>Taskhub</title>
+    {% load static %}
+    <title>{% block title %}{% endblock %} | Taskhub</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 </head>
 
-<body>
-    <nav>
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-950 dark:text-gray-100" hx-replace-url="true">
+    <nav class="bg-gray-900 shadow-sm">
+        <div class="max-w-screen-2xl mx-auto px-4 py-6 flex flex-wrap items-center justify-between">
+            <h1 class="self-center font-semibold xl:text-xl text-lg text-gray-100 hover:text-gray-300 cursor-pointer">
+                <a href="{% url 'core:index' %}">Taskhub</a>
+            </h1>
+            <button data-collapse-toggle="navbar-default" type="button"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-default" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 1h15M1 7h15M1 13h15" />
+                </svg>
+            </button>
+            <ul class="flex items-center space-x-6 text-gray-400 font-medium">
+                {% if request.user.is_authenticated %}
+                <li class="hover:text-gray-500"><a href="#">Dashboard</a></li>
+                <li class="text-sm px-6 py-3 font-medium bg-red-500 text-white hover:bg-red-700 rounded-sm">
+                    <a href="{% url 'core:logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="hover:text-gray-500"><a href="#">About</a></li>
+                <li class="hover:text-gray-500"><a href="#">Contact</a></li>
+                <li class="hover:text-gray-500">
+                    <a href="{% url 'core:login' %}">Login</a>
+                </li>
+                <li>
+                    <a class="px-4 py-2 bg-teal-700 text-white rounded hover:bg-teal-800"
+                        href="{% url 'core:signup' %}">Sign Up</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
     </nav>
-    <div class="main">
+
+    <div class="max-w-screen-2xl mx-auto px-4 py-6">
+        <main>
+            {% block body %}
+            {% endblock %}
+        </main>
     </div>
+
 </body>
 
 </html>
