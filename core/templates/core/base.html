@@ -27,7 +27,7 @@
             </button>
             <ul class="flex items-center space-x-6 text-gray-400 font-medium">
                 {% if request.user.is_authenticated %}
-                <li class="hover:text-gray-500"><a href="#">Dashboard</a></li>
+                <li class="hover:text-gray-500"><a href="{% url 'tasks:tasks' %}">Tasks</a></li>
                 <li class="text-sm px-6 py-3 font-medium bg-red-500 text-white hover:bg-red-700 rounded-sm">
                     <a href="{% url 'core:logout' %}">Logout</a>
                 </li>
